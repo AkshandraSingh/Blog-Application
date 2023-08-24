@@ -163,17 +163,26 @@ module.exports = {
 
     likeBlog: async (req, res) => {
         try {
-            const blogId = req.params.id;
-            const blogData = await blogSchema.findById(blogId)
+            const {userId,blogId} = req.query;
+            const blogData = await blogSchema.findById(blogId);
+            const userData = await userSchema.findById(userId)
+            const userEmail = userData.userEmail
+            if (blogData.likedBy.includes(userEmail)) {
+                return res.status(400).json({
+                    success: false,
+                    message: "You remove the like"
+                });
+            }
             blogData.blogLikes++;
+            blogData.likedBy.push(userEmail); 
             await blogData.save();
-            blogLogger.log('info',"You liked the blog!")
+            blogLogger.log('info', "You liked the blog!");
             res.status(200).send({
                 success: true,
                 message: "You liked the blog!"
             });
         } catch (error) {
-            blogLogger.log('error', `Error: ${error.message}`)
+            blogLogger.log('error', `Error: ${error.message}`);
             res.status(500).json({
                 success: false,
                 error: `Error occurred: ${error.message}`,

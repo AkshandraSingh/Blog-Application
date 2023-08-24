@@ -14,6 +14,6 @@ router.get('/serachBlog/:letter', userAuthetication, blog.blogSearch)
 router.get('/detailBlog/:id', userAuthetication, blog.blogDetails)
 router.get('/trandingBlogs',blog.trandingBlogs)
 router.get('/allBlogs', blog.allBlogs)
-router.get('/likeBlog/:id', blog.likeBlog)
+router.get('/likeBlog', blog.likeBlog)
 
 module.exports = router

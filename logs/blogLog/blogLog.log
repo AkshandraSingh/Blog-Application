@@ -8,3 +8,7 @@ level info: Aug-23-2023 16:48:01 	Trending Blogs Found!
 level info: Aug-23-2023 16:48:36 	Trending Blogs Found!
 level error: Aug-23-2023 16:49:56 	Error: userLogger is not defined
 level info: Aug-23-2023 16:50:42 	Trending Blogs Found!
+level error: Aug-24-2023 16:06:46 	Error: Cannot read properties of undefined (reading 'id')
+level error: Aug-24-2023 16:11:01 	Error: Cannot read properties of undefined (reading 'id')
+level info: Aug-24-2023 16:13:20 	You liked the blog!
+level info: Aug-24-2023 16:23:59 	You liked the blog!

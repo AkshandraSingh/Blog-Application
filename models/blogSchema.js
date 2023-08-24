@@ -5,6 +5,10 @@ const blogSchema = mongoose.Schema({
         type: String,
         required: true,
     },
+    likedBy: {
+        type: [],
+        default: [],
+    },
     blogDescription: {
         type: String,
         required: true,
