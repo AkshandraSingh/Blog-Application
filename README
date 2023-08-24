@@ -24,7 +24,7 @@ Welcome to the Blog Application! This project is designed to allow users to crea
 - `POST /blog/create`: Create a new blog post.
 - `GET /blog/list`: Fetch a list of all blog posts.
 - `GET /blog/:id`: Retrieve a specific blog post by ID.
-- `PUT /blog/:id/update`: Update a blog post.
+- `PATCH /blog/:id/update`: Update a blog post.
 - `DELETE /blog/:id/delete`: Delete a blog post.
 - `POST /comment/:blogId/create`: Create a comment on a specific blog post.
 - `GET /comment/:blogId/list`: Fetch comments for a specific blog post.
