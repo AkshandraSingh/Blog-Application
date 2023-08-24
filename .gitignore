@@ -1,0 +1,4 @@
+\blogenv
+\node_modules
+\.env
+\pacakage-lock.json

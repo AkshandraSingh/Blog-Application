@@ -1,0 +1,10 @@
+level info: Aug-19-2023 14:24:11 	You liked the blog!
+level error: Aug-19-2023 17:55:01 	Error: userSchema.log is not a function
+level info: Aug-19-2023 17:55:57 	Blog Created Successfully .
+level error: Aug-23-2023 16:19:15 	Error: Invalid login: 535-5.7.8 Username and Password not accepted. Learn more at
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials n9-20020a170902e54900b001bde65894d5sm10637439plf.109 - gsmtp
+level info: Aug-23-2023 16:22:58 	Blog Created Successfully .
+level info: Aug-23-2023 16:48:01 	Trending Blogs Found!
+level info: Aug-23-2023 16:48:36 	Trending Blogs Found!
+level error: Aug-23-2023 16:49:56 	Error: userLogger is not defined
+level info: Aug-23-2023 16:50:42 	Trending Blogs Found!
