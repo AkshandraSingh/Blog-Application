@@ -25,7 +25,7 @@ const commentLogger = createLogger({
             level: "info",
             db: process.env.URL,
             options: {
-                useUnifedTopology: true,
+                useUnifiedTopology: true,
             },
             collection: 'commentLogs',
             format: format.combine(format.timestamp(), format.json())

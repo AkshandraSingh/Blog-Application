@@ -25,7 +25,7 @@ const blogLogger = createLogger({
             level: "info",
             db: process.env.URL,
             options: {
-                useUnifedTopology: true,
+                useUnifiedTopology: true,
             },
             collection: 'blogLogs',
             format: format.combine(format.timestamp(), format.json())

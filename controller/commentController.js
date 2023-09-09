@@ -1,12 +1,12 @@
 const commentSchema = require('../models/commentSchema');
-const commentLogger = require('../utils/commentLogger')
+const commentLogger = require('../utils/commentLogger/commentLogger')
 
 module.exports = {
     createComment: async (req, res) => {
         try {
             const commentData = new commentSchema(req.body);
             commentData.save();
-            commentLogger.log('info',"Comment created successfully .")
+            commentLogger.log('info', "Comment created successfully .")
             res.status(201).send({
                 success: true,
                 message: "Comment created successfully ."
@@ -28,7 +28,7 @@ module.exports = {
             const commentData = await commentSchema.findByIdAndUpdate(commentID, req.body, {
                 new: true,
             });
-            commentLogger.log('info',"Your comment updated successfully .")
+            commentLogger.log('info', "Your comment updated successfully .")
             res.status(200).send({
                 success: true,
                 message: 'Your comment updated successfully .'
@@ -48,7 +48,7 @@ module.exports = {
         try {
             const commentID = req.params.id;
             const commentData = await commentSchema.findByIdAndDelete(commentID);
-            commentLogger.log('info',"Your comment deleted successfully .")
+            commentLogger.log('info', "Your comment deleted successfully .")
             res.status(200).send({
                 success: true,
                 message: 'Your comment deleted successfully .'

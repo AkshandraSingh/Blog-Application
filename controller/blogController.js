@@ -1,7 +1,7 @@
 const blogSchema = require('../models/blogSchema');
 const commentSchema = require('../models/commentSchema');
 const userSchema = require('../models/userSchema');
-const blogLogger = require('../utils/blogLogger');
+const blogLogger = require('../utils/blogLogger/blogLogger');
 const { mailOptions } = require('../services/emailService');
 
 module.exports = {
@@ -10,12 +10,12 @@ module.exports = {
             const userId = req.params.id
             const blogData = new blogSchema(req.body);
             const userData = await userSchema.findById(userId);
-            const blogImage = req.file ? `/upload/userProfile${req.file.filename}` : undefined
+            const blogImage = req.file ? `/upload/userProfile/${req.file.filename}` : undefined
             blogData.blogImage = blogImage
             blogData.userId = userId
             await mailOptions(userData.userEmail, 1);
             await blogData.save();
-            blogLogger.log('info',"Blog Created Successfully .")
+            blogLogger.log('info', "Blog Created Successfully .")
             res.status(201).send({
                 success: true,
                 message: "Blog Created Successfully ."
@@ -36,7 +36,7 @@ module.exports = {
             const blogData = await blogSchema.findByIdAndUpdate(blogID, req.body, {
                 new: true,
             });
-            blogLogger.log('info',"Your blog updated Successfully .")
+            blogLogger.log('info', "Your blog updated Successfully .")
             res.status(200).send({
                 success: true,
                 message: 'Your blog updated Successfully .'
@@ -56,7 +56,7 @@ module.exports = {
         try {
             const blogID = req.params.id;
             const blogData = await blogSchema.findByIdAndDelete(blogID);
-            blogLogger.log('info',"Your blog Deleted Successfully .")
+            blogLogger.log('info', "Your blog Deleted Successfully .")
             res.status(200).send({
                 success: true,
                 message: 'Your blog Deleted Successfully .'
@@ -76,8 +76,8 @@ module.exports = {
         try {
             const letter = req.params.letter;
             const blogSearch = await blogSchema.find({ blogTopic: { $regex: `^${letter}`, $options: "i" } })
-            .select('blogTopic');
-            blogLogger.log('info',"Blogs Founded.")
+                .select('blogTopic');
+            blogLogger.log('info', "Blogs Founded.")
             res.status(200).json({
                 success: true,
                 message: 'Blogs Which Found.',
@@ -106,7 +106,7 @@ module.exports = {
             const commentData = await commentSchema
                 .find({ blogId: id })
                 .populate({ path: "userId", select: "userName" });
-            blogLogger.log('info',"Blog Detail.")
+            blogLogger.log('info', "Blog Detail.")
             res.status(200).json({
                 success: true,
                 message: 'Blog Detail.',
@@ -123,10 +123,10 @@ module.exports = {
         }
     },
 
-    trandingBlogs: async (req, res) => {
+    trendingBlogs: async (req, res) => {
         try {
-            const topBlogs = await blogSchema.find({}) // ! ye pure collection me jetna data rehega vetna find kar le ga .
-                .sort({ blogLikes: -1 })  // ! -1 ek mongoDb ka syntax ha jo Descending order me data lae ga .
+            const topBlogs = await blogSchema.find({})
+                .sort({ blogLikes: -1 })
             // * Ascending order me data lae ga .
             blogLogger.log('info', "Trending Blogs Found!")
             res.status(200).send({
@@ -143,7 +143,7 @@ module.exports = {
         }
     },
 
-    allBlogs: async (req,res) => {
+    allBlogs: async (req, res) => {
         try {
             const allBlogs = await blogSchema.find({})
             blogLogger.log('info', "All blogs")
@@ -163,18 +163,22 @@ module.exports = {
 
     likeBlog: async (req, res) => {
         try {
-            const {userId,blogId} = req.query;
+            const { userId, blogId } = req.query;
             const blogData = await blogSchema.findById(blogId);
             const userData = await userSchema.findById(userId)
             const userEmail = userData.userEmail
             if (blogData.likedBy.includes(userEmail)) {
+                const userIndex = blogData.likedBy.indexOf(userEmail);
+                blogData.blogLikes--;
+                blogData.likedBy.splice(userIndex, 1);
+                await blogData.save();
                 return res.status(400).json({
                     success: false,
                     message: "You remove the like"
                 });
             }
             blogData.blogLikes++;
-            blogData.likedBy.push(userEmail); 
+            blogData.likedBy.push(userEmail);
             await blogData.save();
             blogLogger.log('info', "You liked the blog!");
             res.status(200).send({

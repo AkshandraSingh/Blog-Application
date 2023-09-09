@@ -12,3 +12,7 @@ level error: Aug-24-2023 15:48:24 	New password not match with confirm password
 level info: Aug-24-2023 15:48:28 	user password updated
 level error: Aug-24-2023 15:48:32 	old password is incorrect
 level info: Aug-24-2023 15:48:58 	user password updated
+level info: Sep-06-2023 16:28:52 	User Created Successfully ✔ .
+level info: Sep-06-2023 16:29:46 	User Login Successfully .
+level error: Sep-09-2023 23:07:32 	User is Already Registered with this email
+level info: Sep-09-2023 23:07:39 	User Created Successfully ✔ .

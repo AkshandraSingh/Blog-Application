@@ -9,8 +9,8 @@ const userSchema = {
             .max(20)
             .min(3)
             .message({
-                "string-min": "{#lable} should be at least {#limit} characters",
-                "string-man": "{#lable} should be at least {#limit} characters",
+                "string-min": "{#label} should be at least {#limit} characters",
+                "string-man": "{#label} should be at least {#limit} characters",
             })
             .required(),
         userEmail: joi
@@ -18,8 +18,8 @@ const userSchema = {
             .email()
             .min(11)
             .message({
-                "string-min": "{#lable} should be at least {#limit} characters",
-                "string-man": "{#lable} should be at least {#limit} characters",
+                "string-min": "{#label} should be at least {#limit} characters",
+                "string-man": "{#label} should be at least {#limit} characters",
             })
             .required(),
         userPassword: joiPassword
@@ -46,8 +46,8 @@ const userSchema = {
             .min(1000000000)
             .max(9999999999)
             .message({
-                "string-min": "{#lable} should be at least {#limit} characters",
-                "string-man": "{#lable} should be at least {#limit} characters",
+                "string-min": "{#label} should be at least {#limit} characters",
+                "string-man": "{#label} should be at least {#limit} characters",
             })
             .required(),
         userGender: joi
