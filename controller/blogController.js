@@ -192,5 +192,26 @@ module.exports = {
                 error: `Error occurred: ${error.message}`,
             });
         }
+    },
+
+    myBlogs: async (req, res) => {
+        try {
+            const { userId } = req.params
+            const userPost = await blogSchema.find({
+                userId: userId
+            })
+            blogLogger.log('info', 'User blog found')
+            res.status(200).send({
+                success: true,
+                message: "Your blogs",
+                postData: userPost,
+            })
+        } catch (error) {
+            blogLogger.log('error', `Error: ${error.message}`);
+            res.status(500).json({
+                success: false,
+                error: `Error occurred: ${error.message}`,
+            });
+        }
     }
 }

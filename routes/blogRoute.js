@@ -15,5 +15,6 @@ router.get('/detailBlog/:id', userAuthentication, blog.blogDetails)
 router.get('/trendingBlogs', userAuthentication, blog.trendingBlogs)
 router.get('/allBlogs', userAuthentication, blog.allBlogs)
 router.get('/likeBlog', userAuthentication, blog.likeBlog)
+router.get('/myBlogs/:userId', blog.myBlogs)
 
 module.exports = router
